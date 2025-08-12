@@ -1,9 +1,13 @@
 # ESTRUCTURA DEL PROYECTO
 
 turnos-multiclinica/
+
 ├─ build.gradle
+
 ├─ settings.gradle
+
 ├─ gradlew
+
 ├─ gradlew.bat
 ├─ .gitignore
 ├─ README.md
