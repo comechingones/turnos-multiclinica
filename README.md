@@ -9,84 +9,164 @@ turnos-multiclinica/
 ├─ gradlew
 
 ├─ gradlew.bat
+
 ├─ .gitignore
+
 ├─ README.md
+
 ├─ CHANGELOG.md
+
 ├─ docs/
+
 │  ├─ arquitectura.md
+
 │  ├─ decisiones-ADR/
+
 │  └─ diagramas/
+
 ├─ scripts/
+
 │  ├─ verificar-entorno.sh        # java/gradle/junit ok
+
 │  └─ cargar-datos-ejemplo.sh     # opcional: semilla de datos
+
 ├─ config/
+
 │  └─ app.properties              # configuración simple (ej. ruta de archivo)
+
 └─ src/
+
    ├─ main/
+   
    │  ├─ java/
+   
    │  │  └─ com/github/comechingones/turnos/
+   
    │  │     ├─ app/                        # Capa de aplicación / CLI
+   
    │  │     │  ├─ Main.java                # punto de entrada
+   
    │  │     │  ├─ CliMenu.java             # menú de consola
+   
    │  │     │  └─ ConsoleIO.java           # utilidades de E/S por consola
+   
    │  │     ├─ domain/                     # Modelo de dominio (POJO)
+   
    │  │     │  ├─ Clinica.java
+   
    │  │     │  ├─ Sucursal.java
+   
    │  │     │  ├─ Profesional.java
+   
    │  │     │  ├─ Paciente.java
+   
    │  │     │  ├─ Especialidad.java
+   
    │  │     │  ├─ Turno.java               # fecha/hora, sucursal, profesional, paciente, estado
+   
    │  │     │  └─ value/                   # value objects (validación centralizada)
+   
    │  │     │     ├─ DNI.java
+   
    │  │     │     ├─ Email.java
+   
    │  │     │     └─ Id.java
+   
    │  │     ├─ service/                    # Reglas de negocio / casos de uso
+   
    │  │     │  ├─ TurnoService.java        # crear/listar/cancelar/reprogramar
+   
    │  │     │  ├─ PacienteService.java
+   
    │  │     │  └─ AgendaService.java
+   
    │  │     ├─ repository/                 # Puertos (interfaces)
+   
    │  │     │  ├─ TurnoRepository.java
+   
    │  │     │  ├─ PacienteRepository.java
+   
    │  │     │  └─ ProfesionalRepository.java
+   
    │  │     ├─ persistence/                # Adaptadores (implementaciones de repo)
+   
    │  │     │  ├─ memory/                  # in-memory para empezar + tests
+   
    │  │     │  │  ├─ InMemoryTurnoRepository.java
+   
    │  │     │  │  └─ ...
+   
    │  │     │  ├─ file/                    # siguiente etapa (CSV/JSON)
+   
    │  │     │  │  ├─ CsvTurnoRepository.java
+   
    │  │     │  │  └─ JsonTurnoRepository.java
+   
    │  │     │  └─ jdbc/                    # etapa posterior (SQLite/H2)
+   
    │  │     │     ├─ DataSourceFactory.java
+   
    │  │     │     └─ JdbcTurnoRepository.java
+   
    │  │     ├─ dto/                        # opcional: objetos de transporte/IO
+   
    │  │     │  └─ TurnoDTO.java
+   
    │  │     ├─ mapper/                     # mapeos Domain <-> DTO
+   
    │  │     │  └─ TurnoMapper.java
+   
    │  │     ├─ validation/                 # validaciones y políticas
+   
    │  │     │  ├─ TurnoValidator.java
+   
    │  │     │  └─ PacienteValidator.java
+   
    │  │     ├─ exception/                  # excepciones de dominio/aplicación
+   
    │  │     │  ├─ DomainException.java
+   
    │  │     │  ├─ NotFoundException.java
+   
    │  │     │  └─ ValidationException.java
+   
    │  │     ├─ config/
+   
    │  │     │  └─ AppConfig.java           # “ensamble” simple de dependencias
+   
    │  │     └─ util/
+   
    │  │        └─ DateTimeUtils.java
+   
    │  └─ resources/
+   
    │     ├─ logback.xml                    # (más adelante) logging SLF4J/Logback
+   
    │     └─ data-ejemplo/                  # datasets de ejemplo (CSV/JSON)
+   
    └─ test/
+   
       ├─ java/
+      
       │  └─ com/github/comechingones/turnos/
+      
       │     ├─ domain/
+      
+      
       │     │  └─ TurnoTest.java
+      
       │     ├─ service/
+      
       │     │  └─ TurnoServiceTest.java
+      
       │     └─ persistence/
+      
       │        └─ memory/
+      
       │           └─ InMemoryTurnoRepositoryTest.java
+      
       └─ resources/
+      
          └─ data-test/
 
 Qué hace cada capa (resumen):
